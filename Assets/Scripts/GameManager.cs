@@ -9,40 +9,48 @@ public class GameManager : MonoBehaviour
     //Game Menu
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject playOneMoreButton;
-    public event Action UpdateBlockspawner; 
+    public event Action UpdateBlockspawner;
     [SerializeField] GameObject gameOverMenu;
     SceneFader sceneFader;
     //Game State
     bool canPlayOneMore =true;
-    bool isLost;
+    //bool isLost;
     bool isPause;
     bool isChange = false;
 
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
     }
     private void Start()
     {
         sceneFader = FindObjectOfType<SceneFader>();
-        isLost = false;
-        isPause = false;
+        //isLost = false;
         Time.timeScale = 1;
         Color newColor = new Color(UnityEngine.Random.Range(10, 250f) / 255, UnityEngine.Random.Range(10, 250f) / 255, UnityEngine.Random.Range(100, 250f) / 255);// pick random color for background
+        if(backgroundImage==null)
+        {
+            return;
+        }
         backgroundImage.material.DOColor(newColor, 0.5f);
     }
     void Update()
     {
+        if (backgroundImage == null)
+            return;
         UpdateGameState();
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-         if(!isPause)
+            if (!isPause)
             {
                 Pausegame();
             }
@@ -66,7 +74,7 @@ public class GameManager : MonoBehaviour
         isPause = false;
         pauseMenu.SetActive(isPause);
 
-    }// Lost State
+    }// Lost Game
     public void LostGame()
     {
         gameOverMenu.SetActive(true);
@@ -78,10 +86,15 @@ public class GameManager : MonoBehaviour
         {
             playOneMoreButton.SetActive(false);
         }
-        isLost = true;
+        //isLost = true;
         StartCoroutine(ScoreManager.Instance.DisplayScore());
         Time.timeScale = 0;
-
+    }
+    //quit game
+    public void QuitGame()
+    {
+        Debug.Log("Quitting...");
+        Application.Quit();
     }
     private void UpdateGameState()
     {
@@ -99,13 +112,19 @@ public class GameManager : MonoBehaviour
     }
     public void ReplayGame()
     {
-       sceneFader.FadeToScene(SceneManager.GetActiveScene().name);
+        //sceneFader.FadeToScene(SceneManager.GetActiveScene().name);
+        sceneFader.FadeToScene("Level");
+
     }
     public void ContinueAfterLost() //watch ad to continue play one more live;
     {
         canPlayOneMore = false;
         ContinueGame();
         gameOverMenu.SetActive(false);
+    }
+    public void LoadScene(string _sceneName)
+    {
+        sceneFader.FadeToScene(_sceneName);
     }
 
 }

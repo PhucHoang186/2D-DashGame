@@ -62,7 +62,9 @@ public class BlockSpawner : MonoBehaviour
         }
 
     }
-
+    private void Update()
+    {
+    }
     IEnumerator SpawnBlockCo()
     {
         while (true)

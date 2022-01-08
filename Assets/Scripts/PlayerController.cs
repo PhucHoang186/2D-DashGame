@@ -11,10 +11,6 @@ public class PlayerController : MonoBehaviour
     int moveDir = 1; //move right
 
 
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {

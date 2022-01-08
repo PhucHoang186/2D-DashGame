@@ -19,7 +19,6 @@ public class Block : MonoBehaviour
             gameObject.SetActive(false);
             if (gameObject.CompareTag("Small"))
             {
-                Debug.Log("Print");
                 BlockSpawner.Instance.smallBlockQueue.Enqueue(this);
             }
             else if (gameObject.CompareTag("Normal"))

@@ -20,9 +20,9 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        //DontDestroyOnLoad(this.gameObject);
         Instance = this;
     }
+   
     void Start()
     {
         bestScore = PlayerPrefs.GetInt("bestScore", 0);
