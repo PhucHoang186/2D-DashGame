@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-
+using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static SoundManager Instance;
+    public Sound[] sounds;
 
     private void Awake()
     {
@@ -13,21 +13,35 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
         }
-        else
+        else if(Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.name = s.soundName;
+            s.source.clip = s.audioClip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+        }
     }
-    public void ToggleMusic(AudioSource _source)
+    private void Start()
     {
-        _source.mute = !_source.mute;
+        PLayMusic("Background");
     }
-
-    // Update is called once per frame
-    void Update()
+    public void PLayMusic(string _name)
     {
-        
+        Sound sound = Array.Find(sounds, sound => sound.soundName == _name);
+        sound.source.Play();
+    }
+    public bool ToggleMusic(string _name)
+    {
+        Sound sound = Array.Find(sounds, sound => sound.soundName == _name);
+        sound.source.mute = !sound.source.mute;
+        return sound.source.mute;
     }
 }

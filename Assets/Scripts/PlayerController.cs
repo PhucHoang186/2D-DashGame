@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
@@ -30,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isMoving)
         {
-            transform.Translate( Vector3.right * moveDir * playerSpeed * Time.deltaTime);
+            transform.Translate( Vector3.right * moveDir * playerSpeed * Time.fixedDeltaTime);
             if (transform.position.x >= borderPos)
             {
                 ScoreManager.Instance.UpdateScoreUI();

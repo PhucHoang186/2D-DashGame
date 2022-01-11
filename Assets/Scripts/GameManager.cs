@@ -1,16 +1,16 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField] SpriteRenderer backgroundImage;
     //Game Menu
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject playOneMoreButton;
+    [SerializeField] GameObject pauseMenu; //Pause Menu
+    [SerializeField] GameObject gameOverMenu;//Game Lost Menu
+    [SerializeField] GameObject optionMenu;//option Menu
+    [SerializeField] GameObject playOneMoreButton; 
     public event Action UpdateBlockspawner;
-    [SerializeField] GameObject gameOverMenu;
     SceneFader sceneFader;
     //Game State
     bool canPlayOneMore =true;
@@ -95,6 +95,16 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Quitting...");
         Application.Quit();
+    }
+    // open Option Menu
+    public void OpenMenu()
+    {
+        optionMenu.gameObject.SetActive(true);
+    }
+    public void CloseMenu()
+    {
+        optionMenu.gameObject.SetActive(false);
+
     }
     private void UpdateGameState()
     {

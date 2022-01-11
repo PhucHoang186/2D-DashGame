@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class Sound : MonoBehaviour
+[System.Serializable]
+public class Sound
 {
-    [SerializeField] AudioSource source;
-    [SerializeField] Animator ani;
-    private void Start()
-    {
-        source.Play();
-        ani.SetBool("Active", !source.mute);
-    }
-    public void Toggle()
-    {
-        SoundManager.Instance.ToggleMusic(source);
-        ani.SetBool("Active", !source.mute);
+    public AudioClip audioClip;
+    public string soundName;
+    [Range(0, 1)]
+    public float volume;
+    [Range(0.1f, 3)]
+    public float pitch;
+    public bool loop;
+    [HideInInspector]
+    public AudioSource source;
 
-    }
 }
