@@ -1,6 +1,8 @@
+using System.Collections;
 using System;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -9,7 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu; //Pause Menu
     [SerializeField] GameObject gameOverMenu;//Game Lost Menu
     [SerializeField] GameObject optionMenu;//option Menu
-    [SerializeField] GameObject playOneMoreButton; 
+    [SerializeField] GameObject playOneMoreButton;
+    [SerializeField] GameObject startScreen; // display start text
+    [SerializeField] TMP_Text countdownText;
     public event Action UpdateBlockspawner;
     SceneFader sceneFader;
     //Game State
@@ -17,7 +21,6 @@ public class GameManager : MonoBehaviour
     //bool isLost;
     bool isPause;
     bool isChange = false;
-
 
     private void Awake()
     {
@@ -34,14 +37,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         sceneFader = FindObjectOfType<SceneFader>();
-        //isLost = false;
         Time.timeScale = 1;
         Color newColor = new Color(UnityEngine.Random.Range(10, 250f) / 255, UnityEngine.Random.Range(10, 250f) / 255, UnityEngine.Random.Range(100, 250f) / 255);// pick random color for background
-        if(backgroundImage==null)
+
+        // game manager in the menu scene dont need these game object
+        if (backgroundImage == null || startScreen == null || countdownText == null)
         {
             return;
         }
         backgroundImage.material.DOColor(newColor, 0.5f);
+        countdownText.gameObject.SetActive(false);
+        startScreen.SetActive(true);
     }
     void Update()
     {
@@ -59,6 +65,17 @@ public class GameManager : MonoBehaviour
                 ContinueGame();
             }
         }
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            if(startScreen!=null)
+            {
+                startScreen.SetActive(false);
+            }
+            else
+            {
+                return;
+            }
+        }
     }
     // Pause Game
     public void Pausegame()
@@ -70,11 +87,23 @@ public class GameManager : MonoBehaviour
     //Continue Game
     public void ContinueGame()
     {
-        Time.timeScale = 1;
         isPause = false;
         pauseMenu.SetActive(isPause);
+        StartCoroutine(CountdownCo());
+    }
+    IEnumerator CountdownCo()
+    {
 
-    }// Lost Game
+        countdownText.gameObject.SetActive(true);
+        for (int i = 3; i > 0; i--)
+        {
+            countdownText.text = i.ToString();
+            yield return new WaitForSecondsRealtime(1f);
+        }
+        countdownText.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+    // Lost Game
     public void LostGame()
     {
         gameOverMenu.SetActive(true);
@@ -137,4 +166,5 @@ public class GameManager : MonoBehaviour
         sceneFader.FadeToScene(_sceneName);
     }
 
+  
 }
