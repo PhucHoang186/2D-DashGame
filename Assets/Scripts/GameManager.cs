@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playOneMoreButton;
     [SerializeField] GameObject startScreen; // display start text
     [SerializeField] TMP_Text countdownText;
-    public event Action UpdateBlockspawner;
+    public static event Action UpdateBlockspawner;
     SceneFader sceneFader;
     //Game State
     bool canPlayOneMore =true;
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
     {
         if ( ScoreManager.Instance.score!=0 && ScoreManager.Instance.score % 5 == 0 && !isChange)// change color every 5 points
         {
-            UpdateBlockspawner?.Invoke();
+            UpdateBlockspawner?.Invoke(); // Update the block speed 
             isChange = true;
             Color newColor = new Color(UnityEngine.Random.Range(100, 250f) / 255, UnityEngine.Random.Range(100, 250f) / 255, UnityEngine.Random.Range(100, 250f) / 255);// pick random color for background
             backgroundImage.material.DOColor(newColor,0.5f);

@@ -1254,7 +1254,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
 --- !u!212 &787138536
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1318,7 +1318,7 @@ Transform:
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &787138538
 MonoBehaviour:
@@ -1333,7 +1333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   borderPos: 3.1
-  playerSpeed: 17
+  playerSpeed: 18
 --- !u!50 &787138539
 Rigidbody2D:
   serializedVersion: 4
@@ -1675,6 +1675,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841017515}
   m_CullTransparentMesh: 1
+--- !u!1 &945172823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 945172825}
+  - component: {fileID: 945172824}
+  m_Layer: 0
+  m_Name: BlockManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &945172824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945172823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69f052ee8531c64b853afd439872246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalBlockPrefab: {fileID: 768315989, guid: aaeb2d0892ca804439996e24b6de9c8e, type: 3}
+  smallBlockPrefab: {fileID: 5081273475501035143, guid: d5d85764b747d9b40b2bed3e25c6a117, type: 3}
+  minLeft: -2
+  maxLeft: -1
+  minRight: 1
+  maxRight: 2
+  minPos: -1
+  maxPos: 1
+  distanceBlock: 6
+  maxBlockSpeed: 7
+  minBlockSpeed: 6
+  blockSpeedAmount: 0.2
+  numberPrefabs: 5
+--- !u!4 &945172825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945172823}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &964131373
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,64 +3183,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682214350}
   m_CullTransparentMesh: 1
---- !u!1 &1683322027
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1683322029}
-  - component: {fileID: 1683322028}
-  m_Layer: 0
-  m_Name: BlockSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1683322028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683322027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7329888b6be6764c9a6f95b250951d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalBlockPrefab: {fileID: 768315989, guid: aaeb2d0892ca804439996e24b6de9c8e, type: 3}
-  smallBlockPrefab: {fileID: 5081273475501035143, guid: d5d85764b747d9b40b2bed3e25c6a117, type: 3}
-  minLeft: -2
-  maxLeft: -1
-  minRight: 1
-  maxRight: 2
-  minPos: -1
-  maxPos: 1
-  maxSpawnRate: 1.5
-  minSpawnRate: 0.9
-  spawnRateAmount: 0.1
-  maxBlockSpeed: 6
-  minBlockSpeed: 5
-  blockSpeedAmount: 0.1
-  numberPrefabs: 10
---- !u!4 &1683322029
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683322027}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1710860319
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 public class Block : MonoBehaviour
 {
-    public float defaultSpeed = 5f;
+    public float defaultSpeed;
     void FixedUpdate()
     {
         Movement();
@@ -19,11 +19,11 @@ public class Block : MonoBehaviour
             gameObject.SetActive(false);
             if (gameObject.CompareTag("Small"))
             {
-                BlockSpawner.Instance.smallBlockQueue.Enqueue(this);
+                BlockSpawnerManager.Instance.smallBlockQueue.Enqueue(this);
             }
             else if (gameObject.CompareTag("Normal"))
             {
-                BlockSpawner.Instance.normalBlockQueue.Enqueue(this);
+                BlockSpawnerManager.Instance.normalBlockQueue.Enqueue(this);
 
             }
         }
