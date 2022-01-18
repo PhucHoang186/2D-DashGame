@@ -8,12 +8,17 @@ public class PlayerController : MonoBehaviour
     bool isMoving =false;
     int moveDir = 1; //move right
 
-
+    bool wantToMove = false;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)  && !isMoving)
+        if (Input.GetKeyDown(KeyCode.A))
         {
+            wantToMove = true;
+        }
+        if(wantToMove && !isMoving)// make movement more sensitive
+        {
+            wantToMove = false;
             isMoving = true;
         }
     }
@@ -42,10 +47,8 @@ public class PlayerController : MonoBehaviour
                 transform.position = new Vector2(-borderPos, transform.position.y);
                 isMoving = false;
                 moveDir = -moveDir;
-
             }
         }
     }
-
 
 }

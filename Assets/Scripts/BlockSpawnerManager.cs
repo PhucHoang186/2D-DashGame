@@ -8,6 +8,7 @@ public class BlockSpawnerManager : MonoBehaviour
     // prefabs
     [SerializeField] Block normalBlockPrefab;
     [SerializeField] Block smallBlockPrefab;
+    [SerializeField] Block coinPrefab;
     // clamp spawn position normal block
     [SerializeField] float minLeft = -2f;
     [SerializeField] float maxLeft = -1f;
@@ -18,7 +19,8 @@ public class BlockSpawnerManager : MonoBehaviour
     [SerializeField] float maxPos = 1f;
     //control spawn block rate
     [SerializeField] float distanceBlock = 2;
-    float currentSpawnRate;
+    //control spawn coin rate
+    [SerializeField] float distanceCoin = 2;
     //control block speed
     [SerializeField] float maxBlockSpeed = 7f;
     [SerializeField] float minBlockSpeed = 6f;
@@ -27,11 +29,22 @@ public class BlockSpawnerManager : MonoBehaviour
     [SerializeField] int numberPrefabs = 5;
     // pooling block
     [HideInInspector]
-    public Queue<Block> normalBlockQueue;
+    public Queue<Block> normalBlockQueue;// normal block
     [HideInInspector]
-    public Queue<Block> smallBlockQueue;
-    //new block
+    public Queue<Block> smallBlockQueue;// small block
+    [HideInInspector]
+    public Queue<Block> coinQueue;// Coin
+
+    // contain block that being currently spawn
+    [HideInInspector]
+    public Queue<Block> currentBlockQueue;
+    // contain coin that being currently spawn
+    [HideInInspector]
+    public Queue<Block> currentCoinSpawn;
+
+    //new block being spawn
     Block newBlockSpawn;
+    bool coinSpawn;
     private void Awake()
     {
         if (Instance != null)
@@ -48,24 +61,42 @@ public class BlockSpawnerManager : MonoBehaviour
         currentBlockSpeed = minBlockSpeed;
         smallBlockQueue = new Queue<Block>();
         normalBlockQueue = new Queue<Block>();
+        coinQueue = new Queue<Block>();
+        currentBlockQueue = new Queue<Block>();
         for (int i = 0; i < numberPrefabs; i++)
         {
-            Block newSmallBlock = Instantiate(smallBlockPrefab, new Vector2(Random.Range(minPos, maxPos), transform.position.y), Quaternion.identity);
+            //Pooling small block
+            Block newSmallBlock = Instantiate(smallBlockPrefab, Vector2.zero, Quaternion.identity);
             newSmallBlock.gameObject.SetActive(false);
             smallBlockQueue.Enqueue(newSmallBlock);
-
-            Block newNormalBlock = Instantiate(normalBlockPrefab, new Vector2(Random.Range(minPos, maxPos), transform.position.y), Quaternion.identity);
+            //Pooling normal block
+            Block newNormalBlock = Instantiate(normalBlockPrefab, Vector2.zero, Quaternion.identity);
             newNormalBlock.gameObject.SetActive(false);
             normalBlockQueue.Enqueue(newNormalBlock);
+            //Pooling coins
+            Block newCoin = Instantiate(coinPrefab, Vector2.zero, Quaternion.identity);
+            newCoin.gameObject.SetActive(false);
+            coinQueue.Enqueue(newCoin);
         }
         newBlockSpawn = SpawnBlock();
     }
     private void Update()
     {
-        CheckBlockDistance();
+        if(CheckBlockDistance(distanceBlock, newBlockSpawn.transform))
+        {
+            newBlockSpawn = SpawnBlock();
+        }
+        if (CheckBlockDistance(distanceCoin, newBlockSpawn.transform) && coinSpawn)
+        {
+            coinSpawn = false;
+            SpawnCoin();
+        }
+
+
     }
     Block SpawnBlock()
     {
+        coinSpawn = true;
         Block newBlock = null;
         float pickBlock = Random.Range(1, 11);
         if (pickBlock < 4) // pick which block to spawn
@@ -81,7 +112,7 @@ public class BlockSpawnerManager : MonoBehaviour
             newBlock = normalBlockQueue.Dequeue();
             newBlock.gameObject.SetActive(true);
             newBlock.defaultSpeed = currentBlockSpeed;
-            if (pickSide >= 5) // pickwhich side to spawn block
+            if (pickSide >= 5) // pick which side to spawn block
             {
                 newBlock.transform.position = new Vector2(Random.Range(minLeft, maxLeft), transform.position.y);
             }
@@ -90,13 +121,33 @@ public class BlockSpawnerManager : MonoBehaviour
                 newBlock.transform.position = new Vector2(Random.Range(minRight, maxRight), transform.position.y);
             }
         }
+        currentBlockQueue.Enqueue(newBlock);// to control all the active block's speed
         return newBlock;
     }
+
+    void SpawnCoin()
+    {
+        Block newCoin = null;
+        float spawn = Random.Range(1, 11); // chooe if spawn coin or not
+        if (spawn > 7)
+        {
+
+            newCoin = coinQueue.Dequeue();
+            newCoin.gameObject.SetActive(true);
+            newCoin.transform.position = new Vector2(0, transform.position.y);
+            newCoin.defaultSpeed = currentBlockSpeed;
+            currentBlockQueue.Enqueue(newCoin);
+        }
+    }
+    // update the speed of all the blocks
     public void UpdateBlockSpeed()
     {
         currentBlockSpeed += blockSpeedAmount;
         currentBlockSpeed = Mathf.Clamp(currentBlockSpeed, minBlockSpeed, maxBlockSpeed);
-        Debug.Log(currentBlockSpeed);
+        foreach (Block currentBlock in currentBlockQueue)
+        {
+            currentBlock.defaultSpeed = currentBlockSpeed;
+        }
     }
     private void OnEnable ()
     {
@@ -106,12 +157,17 @@ public class BlockSpawnerManager : MonoBehaviour
     {
         GameManager.UpdateBlockspawner -= UpdateBlockSpeed;
     }
-    void CheckBlockDistance()
+    //To keep the distance between blocks the same 
+    bool CheckBlockDistance(float _distance, Transform _newPos)
     {   
-        float distanceBetweenBlock = Mathf.Abs(transform.position.y -  newBlockSpawn.transform.position.y);
-        if (distanceBetweenBlock >= distanceBlock)
+        float distanceBetweenBlock = Mathf.Abs(transform.position.y - _newPos.position.y);
+        if (distanceBetweenBlock >= _distance)
         {
-            newBlockSpawn = SpawnBlock();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

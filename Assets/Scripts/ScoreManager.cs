@@ -5,9 +5,11 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text bestScoreText;
-    [SerializeField] TMP_Text finalScoreText;
+    [SerializeField] TMP_Text scoreText; // display score text
+    [SerializeField] TMP_Text bestScoreText;// display best score text
+    [SerializeField] TMP_Text coinText;// display coin test
+    [SerializeField] TMP_Text finalScoreText;// display final score test
+
     [SerializeField] float scoreDisplaySpeed=.3f;
 
     // score
@@ -33,6 +35,10 @@ public class ScoreManager : MonoBehaviour
     {
         score += 1;        
         scoreText.text = score.ToString();
+    }
+    public void UpdateCoinUI()
+    {
+        coinText.text = PlayerStats.Instance.money.ToString();
     }
     public void SaveBestScore()
     {
