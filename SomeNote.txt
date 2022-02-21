@@ -1,0 +1,2 @@
+Please set the resolution to 9:16 ratio(1080:1920) to play the game
+Select MenuScene and start to play
