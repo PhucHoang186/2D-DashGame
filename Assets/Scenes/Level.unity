@@ -870,7 +870,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press "A" to play
+  m_text: Press to play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -977,7 +977,7 @@ RectTransform:
   - {fileID: 995366795}
   - {fileID: 1122324453}
   m_Father: {fileID: 2067677187}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1502,7 +1502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d24619b1996d594dbfa8725eee0396e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderPos: 3.1
+  borderPos: 3.5
   playerSpeed: 18
 --- !u!50 &787138539
 Rigidbody2D:
@@ -1878,12 +1878,12 @@ MonoBehaviour:
   smallBlockPrefab: {fileID: 5081273475501035143, guid: d5d85764b747d9b40b2bed3e25c6a117, type: 3}
   coinPrefab: {fileID: 8818081603299056440, guid: 5ff0d3e68e93fcf4ea9f38a925e3b60e, type: 3}
   minLeft: -2
-  maxLeft: -1
-  minRight: 1
+  maxLeft: -1.5
+  minRight: 1.5
   maxRight: 2
   minPos: -1
   maxPos: 1
-  distanceBlock: 6
+  distanceBlock: 6.5
   distanceCoin: 2
   maxBlockSpeed: 7
   minBlockSpeed: 6
@@ -1969,8 +1969,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2466250751
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.57254905}
+    rgba: 2449473536
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0.57254905}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2307,7 +2307,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1122324452
 GameObject:
@@ -2438,7 +2438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1164306158
 GameObject:
@@ -2709,7 +2709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1387437991
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2723,11 +2723,11 @@ RectTransform:
   m_Children:
   - {fileID: 572618515}
   m_Father: {fileID: 2067677187}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 774}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1387437992
@@ -3380,7 +3380,7 @@ RectTransform:
   m_Children:
   - {fileID: 88157697}
   m_Father: {fileID: 2067677187}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4021,7 +4021,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1908465626
 GameObject:
@@ -4100,7 +4100,7 @@ Transform:
   m_GameObject: {fileID: 1908465626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 13, z: 1}
+  m_LocalScale: {x: 8, y: 14, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -4442,13 +4442,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 315724097}
+  - {fileID: 1387437991}
   - {fileID: 591611014}
   - {fileID: 1608051475}
-  - {fileID: 1387437991}
   - {fileID: 964131374}
   - {fileID: 60982797}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4606,7 +4606,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5433590629726371649, guid: 7d6c213377fdf2f47a965d57d213a511, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5433590629726371649, guid: 7d6c213377fdf2f47a965d57d213a511, type: 3}
       propertyPath: m_LocalPosition.x

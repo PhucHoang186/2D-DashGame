@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameOverMenu;//Game Lost Menu
     [SerializeField] GameObject optionMenu;//option Menu
     [SerializeField] GameObject playOneMoreButton;
-    [SerializeField] GameObject startScreen; // display start text
+    public GameObject startScreen; // display start text
     [SerializeField] TMP_Text countdownText;
     public static event Action UpdateBlockspawner;
     SceneFader sceneFader;
@@ -63,17 +63,6 @@ public class GameManager : MonoBehaviour
             else
             {
                 ContinueGame();
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            if(startScreen!=null)
-            {
-                startScreen.SetActive(false);
-            }
-            else
-            {
-                return;
             }
         }
     }
@@ -151,7 +140,6 @@ public class GameManager : MonoBehaviour
     }
     public void ReplayGame()
     {
-        //sceneFader.FadeToScene(SceneManager.GetActiveScene().name);
         sceneFader.FadeToScene("Level");
 
     }

@@ -9,6 +9,7 @@ public class BlockSpawnerManager : MonoBehaviour
     [SerializeField] Block normalBlockPrefab;
     [SerializeField] Block smallBlockPrefab;
     [SerializeField] Block coinPrefab;
+    [Header("Set Clamp Spawner")]
     // clamp spawn position normal block
     [SerializeField] float minLeft = -2f;
     [SerializeField] float maxLeft = -1f;
@@ -17,6 +18,7 @@ public class BlockSpawnerManager : MonoBehaviour
     // clamp spawn position small block
     [SerializeField] float minPos = -1f;
     [SerializeField] float maxPos = 1f;
+    [Header("Block Properties")]
     //control spawn block rate
     [SerializeField] float distanceBlock = 2;
     //control spawn coin rate
